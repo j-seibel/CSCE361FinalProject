@@ -1,5 +1,5 @@
 ﻿var counter = 0;
-var max = 5;
+var max = 7;
 while (max is -1 || counter < max)
 {
     Console.WriteLine($"Counter: {++counter}");
