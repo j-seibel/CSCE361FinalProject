@@ -16,7 +16,7 @@ cd path/to/your/project/App/CardGame
 ## Step 2: Start the container
 
 ```bash
-docker run -it --rm cg
+docker run -it --rm -p 8080:80 cg
 ```
 ## Step 3: Update Code
 
