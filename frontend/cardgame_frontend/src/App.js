@@ -1,12 +1,9 @@
 import './App.css';
-import deck from './components/deck'
+import Deck from './components/deck'
 
 function App() {
   return (
-    
-    <deck/>
-
-      
+    <Deck/>
   );
 }
 

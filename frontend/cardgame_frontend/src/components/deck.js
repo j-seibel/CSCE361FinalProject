@@ -1,7 +1,6 @@
 import React from 'react';
 
 
-
 const suits = [
     "Diamonds",
     "Spades",
@@ -9,12 +8,12 @@ const suits = [
     "Hearts"
 ]
 
-export default class deck extends React.Component {
+export default class Deck extends React.Component {
 
     render() {
         return (
             <h2>
-                asl;dfjalksjfl;kasjf;lkj
+                A DECK???
             </h2>
         )
     }
