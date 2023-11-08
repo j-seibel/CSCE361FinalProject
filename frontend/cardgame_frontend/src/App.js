@@ -1,10 +1,12 @@
 import './App.css';
+import deck from './components/deck'
 
 function App() {
   return (
-    <div className="App">
-      DOE STHIS WORK
-    </div>
+    
+    <deck/>
+
+      
   );
 }
 
