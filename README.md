@@ -10,19 +10,19 @@ This guide will walk you through the steps to set up a .NET Docker environment f
 First, navigate to the "App" folder of your project using the command line. You can do this using the `cd` (change directory) command:
 
 ```bash
-cd path/to/your/project/App
+cd path/to/your/project/App/CardGame
 ```
 
 ## Step 2: Start the container
 
 ```bash
-docker run -it --rm cg
+docker run  --rm -p 8080:80 cg
 ```
 ## Step 3: Update Code
 
 After changing the code the container can be rebuilt with
 
 ```bash
-docker build -t cg .
+ docker build -t cg -f CardGame\\Dockerfile .
 ```
 
