@@ -23,6 +23,6 @@ docker run -it --rm -p 8080:80 cg
 After changing the code the container can be rebuilt with
 
 ```bash
- docker build -t cg -f Cardgame\Dockerfile .
+ docker build -t cg -f CardGame\\Dockerfile .
 ```
 
