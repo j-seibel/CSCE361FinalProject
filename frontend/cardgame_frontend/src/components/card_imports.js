@@ -1,0 +1,1 @@
+import h2 from './../cards/PNG-cards-1.3/2_of_hearts.png';
