@@ -1,4 +1,4 @@
-using SQL;
+using CardGame.SQL;
 
 using System;
 using System.Net;
@@ -43,8 +43,7 @@ namespace CardGame
 
             app.Run();
 
-            ConnectionAccessor accessor = new ConnectionAccessor();
-            accesor.testDatabaseConnection();
+            ConnectionAccessor.TestDatabaseConnection();
         }
     }
 }

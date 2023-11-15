@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\App",
+    "\\App\\CardGame",
+    "\\App\\CardGame\\CardGame",
     "\\frontend",
-    "\\SQL"
+    "\\frontend\\cardgame_frontend"
   ],
+  "SelectedNode": "\\App\\CardGame\\CardGame\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
