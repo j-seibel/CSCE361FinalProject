@@ -23,11 +23,6 @@ docker run  --rm -p 8080:80 cg
 After changing the code the container can be rebuilt with
 
 ```bash
-<<<<<<< Updated upstream
  docker build -t cg -f CardGame\\Dockerfile .
 ```
 
-=======
-docker build -t cg .
-```
->>>>>>> Stashed changes
