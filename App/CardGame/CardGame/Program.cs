@@ -1,4 +1,10 @@
 using SQL;
+
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Net.WebSockets;
+
 namespace CardGame
 {
     public class Program
@@ -26,9 +32,14 @@ namespace CardGame
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+            app.UseWebSockets();
 
 
             app.MapControllers();
+
+            
+
+            
 
             app.Run();
 
