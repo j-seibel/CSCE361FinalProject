@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import h2 from "../cards/PNG-cards-1.3/2_of_hearts.png"
+
 import h1 from './../cards/PNG-cards-1.3/1_of_hearts.png';
 import h2 from './../cards/PNG-cards-1.3/2_of_hearts.png';
 import h3 from './../cards/PNG-cards-1.3/3_of_hearts.png';
@@ -56,32 +56,86 @@ import d11 from './../cards/PNG-cards-1.3/11_of_diamonds.png';
 import d12 from './../cards/PNG-cards-1.3/12_of_diamonds.png';
 import d13 from './../cards/PNG-cards-1.3/13_of_diamonds.png';
 
+const map = new Map();
+map.set('h1', h1);
+map.set('h2', h2);
+map.set('h3', h3);
+map.set('h4', h4);
+map.set('h5', h5);
+map.set('h6', h6);
+map.set('h7', h7);
+map.set('h8', h8);
+map.set('h9', h9);
+map.set('h10', h10);
+map.set('h11', h11);
+map.set('h12', h12);
+map.set('h13', h13);
+
+map.set('c1', c1);
+map.set('c2', c2);
+map.set('c3', c3);
+map.set('c4', c4);
+map.set('c5', c5);
+map.set('c6', c6);
+map.set('c7', c7);
+map.set('c8', c8);
+map.set('c9', c9);
+map.set('c10', c10);
+map.set('c11', c11);
+map.set('c12', c12);
+map.set('c13', c13);
+
+map.set('d1', d1);
+map.set('d2', d2);
+map.set('d3', d3);
+map.set('d4', d4);
+map.set('d5', d5);
+map.set('d6', d6);
+map.set('d7', d7);
+map.set('d8', d8);
+map.set('d9', d9);
+map.set('d10', d10);
+map.set('d11', d11);
+map.set('d12', d12);
+map.set('d13', d13);
+
+map.set('s1', s1);
+map.set('s2', s2);
+map.set('s3', s3);
+map.set('s4', s4);
+map.set('s5', s5);
+map.set('s6', s6);
+map.set('s7', s7);
+map.set('s8', s8);
+map.set('s9', s9);
+map.set('s10', s10);
+map.set('s11', s11);
+map.set('s12', s12);
+map.set('s13', s13);
 
 
-const suits = ["Hearts", "Clubs", "Diamonds", "Spades"];
-const values = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
+const suits = ["hearts", "clubs", "diamonds", "spades"];
+const values = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
 
 function getCardIMG({card}) {
   var val = "";
-  var suit = card.suit[0].lower();
-
+  
+  var suit = card.suit[0].toLowerCase();
+  
   for (var i = 0; i < 13; i++) {
     if (values[i] === card.value) {
       val = (i+1).toString();
     }
   }
-  
   return suit + val;
-
 }
 
 function Card({card}) {
-  console.log(card)
+  var s = getCardIMG({card});
   return (
-    <img src={h2}/>
+    <img src={map.get(s)}/>
   )
 }
-
 
 function Deck(){
 
@@ -104,7 +158,7 @@ function Deck(){
 
     return (
         <div>
-            {deck.length > 0 ? <Card card={deck[2]}/> : <></>}
+            {deck.length > 0 ? <Card card={deck[47]}/> : <></>}
         </div>
     )
 }
