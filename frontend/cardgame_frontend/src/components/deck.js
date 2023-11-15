@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import back from './../cards/PNG-cards-1.3/back.png';
+
 import h1 from './../cards/PNG-cards-1.3/1_of_hearts.png';
 import h2 from './../cards/PNG-cards-1.3/2_of_hearts.png';
 import h3 from './../cards/PNG-cards-1.3/3_of_hearts.png';
@@ -113,7 +115,6 @@ map.set('s11', s11);
 map.set('s12', s12);
 map.set('s13', s13);
 
-
 const suits = ["hearts", "clubs", "diamonds", "spades"];
 const values = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
 
@@ -133,34 +134,46 @@ function getCardIMG({card}) {
 function Card({card}) {
   var s = getCardIMG({card});
   return (
-    <img src={map.get(s)}/>
+    <img src={map.get(s)} className = "card"/>
   )
 }
 
 function Deck(){
 
-    const [deck, setDeck] = useState([]);
-    useEffect(() => {
-        const initializeDeck = () => {
-            const d = [];
-            for (var i = 0; i < 4; i++) {
-                for (var j = 0; j < 13; j++){
-                    d.push({
-                        "suit" : suits[i],
-                        "value" : values[j],
-                    })
-                }
-            }
-            setDeck(d);
-        }
-        initializeDeck();
-    }, []);
+  // state of the deck component
+  const [deck, setDeck] = useState([]);
 
-    return (
-        <div>
-            {deck.length > 0 ? <Card card={deck[47]}/> : <></>}
-        </div>
-    )
+  // this is a constructor for the deck component
+  useEffect(() => {
+      const initializeDeck = () => {
+          const d = [];
+          for (var i = 0; i < 4; i++) {
+              for (var j = 0; j < 13; j++){
+                  d.push({
+                      "suit" : suits[i],
+                      "value" : values[j],
+                  })
+              }
+          }
+          setDeck(d);
+      }
+      initializeDeck();
+  }, []);
+  
+  return (
+    <div>
+      {deck.length > 0 ? <img src={back} className="deck"/> : <></>}
+      {deck.length > 0 ? <Card card={deck[0]}/> : <></>}
+      {deck.length > 0 ? <Card card={deck[1]}/> : <></>}
+      {deck.length > 0 ? <Card card={deck[2]}/> : <></>}
+      {deck.length > 0 ? <Card card={deck[3]}/> : <></>}
+      {deck.length > 0 ? <Card card={deck[4]}/> : <></>}
+
+    </div>
+  );
+
 }
+
+
     
 export default Deck

@@ -3,6 +3,9 @@
 }
 
 .deck {
-  height : 50px;
+  height : 200px;
 }
 
+.card {
+  height : 200px;
+}
