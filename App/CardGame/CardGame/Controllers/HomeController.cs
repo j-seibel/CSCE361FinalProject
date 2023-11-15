@@ -1,53 +1,64 @@
-﻿using System.Net.WebSockets;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.WebSockets;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebSocketsSample.Controllers;
-
-#region snippet_Controller_Connect
-public class WebSocketController : ControllerBase
+namespace WebSocketsSample.Controllers
 {
-    static private List<WebSocket> connections = new List<WebSocket>();
-    [Route("/ws")]
-    public async Task Get()
+    [ApiController]
+    [Route("[controller]")]
+    public class WebSocketController : ControllerBase
     {
-        if (HttpContext.WebSockets.IsWebSocketRequest)
-        {
-            using var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
-            connections.Add(webSocket);
-            await Echo(webSocket);
-        }
-        else
-        {
-            HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-        }
-    }
-    #endregion
+        private static List<WebSocket> connections = new List<WebSocket>();
 
-    private static async Task Echo(WebSocket webSocket)
-    {
-        var buffer = new byte[1024 * 4];
-        var receiveResult = await webSocket.ReceiveAsync(
-            new ArraySegment<byte>(buffer), CancellationToken.None);
-
-        while (!receiveResult.CloseStatus.HasValue)
+        [HttpGet("/ws")]
+        public async Task<IActionResult> Connect()
         {
-            foreach (var socket in connections)
+            if (HttpContext.WebSockets.IsWebSocketRequest)
             {
-                await socket.SendAsync(
-                    new ArraySegment<byte>(buffer, 0, receiveResult.Count),
-                    receiveResult.MessageType,
-                    receiveResult.EndOfMessage,
-                    CancellationToken.None);
+                var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
+                connections.Add(webSocket);
+                await Echo(webSocket);
+                return Ok();
             }
-
-                receiveResult = await webSocket.ReceiveAsync(
-                    new ArraySegment<byte>(buffer), CancellationToken.None);
-            
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        await webSocket.CloseAsync(
-            receiveResult.CloseStatus.Value,
-            receiveResult.CloseStatusDescription,
-            CancellationToken.None);
+        private static async Task Echo(WebSocket webSocket)
+        {
+            var buffer = new byte[1024 * 4];
+
+            while (true)
+            {
+                var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
+                if (result.MessageType == WebSocketMessageType.Text)
+                {
+                    foreach (var socket in connections)
+                    {
+                        if (socket.State == WebSocketState.Open)
+                        {
+                            await socket.SendAsync(
+                                new ArraySegment<byte>(buffer, 0, result.Count),
+                                result.MessageType,
+                                result.EndOfMessage,
+                                CancellationToken.None);
+                        }
+                    }
+                }
+                else if (result.MessageType == WebSocketMessageType.Close)
+                {
+                    await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+                    connections.Remove(webSocket);
+                    break;
+                }
+            }
+        }
     }
 }
