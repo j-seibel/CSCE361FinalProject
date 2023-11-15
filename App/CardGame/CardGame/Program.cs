@@ -1,4 +1,4 @@
-
+using SQL;
 namespace CardGame
 {
     public class Program
@@ -31,6 +31,9 @@ namespace CardGame
             app.MapControllers();
 
             app.Run();
+
+            ConnectionAccessor accessor = new ConnectionAccessor();
+            accesor.testDatabaseConnection();
         }
     }
 }
