@@ -1,4 +1,4 @@
-using SQL;
+using CardGame.SQL;
 
 using System;
 using System.Net;
@@ -37,14 +37,13 @@ namespace CardGame
 
             app.MapControllers();
 
-            
 
-            
+            ConnectionAccessor.TestDatabaseConnection();
+
 
             app.Run();
 
-            ConnectionAccessor accessor = new ConnectionAccessor();
-            accesor.testDatabaseConnection();
+            
         }
     }
 }
