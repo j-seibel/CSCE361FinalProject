@@ -1,4 +1,3 @@
-import './deck.js'
 import React from 'react'
 
 // mvoe from hand to hand
@@ -6,12 +5,9 @@ import React from 'react'
 // put card back in deck
 
 function Pile(){
-    const [pile, setPile] = useState([]);
-
     return (
         <div></div>
     )
-
 }
 
 export default Pile;
