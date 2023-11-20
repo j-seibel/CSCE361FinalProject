@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FwXbStEl1mrb8quXr6UNompipSHlC4dyYZDF8w++vBPxzwPi1DQ7M0PU7/5uh9QAM8XbapXH29aDCAivTqu8mQ==",
+  "dgSpecHash": "lFNPkERjuWAUwG1qitVXW+gomSX1k8Cj6oZRok3tM2rI5CvyhfqCig4ua89evE416h/Th69YmENJq0ensR9aEQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\joejo\\Documents\\GitHub\\CSCE361FinalProject\\App\\CardGame\\CardGame\\CardGame.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\joejo\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\joejo\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.4\\microsoft.visualstudio.azure.containers.tools.targets.1.19.4.nupkg.sha512",
     "C:\\Users\\joejo\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\joejo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\joejo\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\joejo\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\joejo\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
