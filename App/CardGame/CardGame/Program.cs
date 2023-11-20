@@ -37,8 +37,7 @@ namespace CardGame
 
             app.MapControllers();
 
-
-            ConnectionAccessor.TestDatabaseConnection();
+            DataInserter.addPlayer("splash36", "abc1234");
 
 
             app.Run();

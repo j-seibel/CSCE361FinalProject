@@ -11,6 +11,10 @@ namespace CardGame.SQL
     {
         private static string _connectionString =
             "Data Source =CONNORM-LAPTOP\\SQLEXPRESS;initial catalog = master; trusted_connection=true";
+
+        private static SqlConnection _connection =
+            new(
+                "Data Source =CONNORM-LAPTOP\\SQLEXPRESS;initial catalog = master; trusted_connection=true");
         public ConnectionAccessor()
         {
             
@@ -18,15 +22,14 @@ namespace CardGame.SQL
 
         public static void TestDatabaseConnection()
         {
-            SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                connection.Open();
-                if (connection.State == ConnectionState.Open)
+                _connection.Open();
+                if (_connection.State == ConnectionState.Open)
                 {
                     System.Diagnostics.Debug.WriteLine("Connection Successful!\n\n\n\n");
                     string selectQuery = "insert into Player(gamesPlayed, gamesWon, solitaireELO, warELO) values (201 , 8, 2300, 2000);";
-                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                    using (SqlCommand command = new SqlCommand(selectQuery, _connection))
                     {
                         int rowsAffected = command.ExecuteNonQuery();
                     }
@@ -40,7 +43,39 @@ namespace CardGame.SQL
             {
                 System.Diagnostics.Debug.WriteLine(ex);
             }
-            connection.Close();
+            _connection.Close();
+
+        }
+
+        public static void CreateConnection()
+        {
+            try
+            {
+                _connection.Open();
+                
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+        }
+
+        public static void CloseConnection()
+        {
+            try
+            {
+                _connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+        }
+
+        public static SqlConnection GetConnection()
+        {
+            return _connection;
         }
     }
 }
