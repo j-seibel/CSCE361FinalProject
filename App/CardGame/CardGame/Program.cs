@@ -48,7 +48,9 @@ namespace CardGame
 
             app.MapControllers();
 
+
             ConnectionAccessor.TestDatabaseConnection();
+
 
             app.Run();
         }
