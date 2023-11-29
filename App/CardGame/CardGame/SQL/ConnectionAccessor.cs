@@ -9,16 +9,10 @@ namespace CardGame.SQL
 {
     public class ConnectionAccessor
     {
-        private static string _connectionString =
-            "Data Source =CONNORM-LAPTOP\\SQLEXPRESS;initial catalog = master; trusted_connection=true";
 
         private static SqlConnection _connection =
             new(
                 "Data Source =CONNORM-LAPTOP\\SQLEXPRESS;initial catalog = master; trusted_connection=true");
-        public ConnectionAccessor()
-        {
-            
-        }
 
         public static void TestDatabaseConnection()
         {

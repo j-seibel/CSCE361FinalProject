@@ -71,4 +71,31 @@ public class DataLoader
         return playerInfo;
     }
 
+    public static int getRoomId(string roomCode)
+    {
+        int roomId = -1;
+        string sql = "select roomId from Room where roomCode=@roomCode";
+        SqlCommand cmd = new SqlCommand(sql, ConnectionAccessor.GetConnection());
+        SqlParameter[] param = new SqlParameter[1];
+        param[0] = new SqlParameter("@roomCode", roomCode);
+        cmd.Parameters.Add(param[0]);
+        ConnectionAccessor.CreateConnection();
+        SqlDataReader reader = cmd.ExecuteReader();
+        try
+        {
+            while (reader.Read())
+            {
+                roomId = reader.GetInt32(0);
+                System.Diagnostics.Debug.WriteLine(roomId);
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
+        ConnectionAccessor.CloseConnection();
+
+        return roomId;
+    }
+
 }
