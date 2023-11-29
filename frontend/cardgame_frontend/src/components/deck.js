@@ -129,6 +129,7 @@ function getCardIMG({card}) {
     }
   }
   return suit + val;
+  
 }
 
 function Card({card}) {
