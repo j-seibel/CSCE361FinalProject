@@ -2,10 +2,9 @@
 {
     public class Room
     {
-        public int Id { get; set; }
-        public string RoomCode { get; set; }
-        public string Name { get; set; }
+        public string roomID { get; set; }
+        public string name { get; set; }
         
-        public string Host { get; set; }
+        public string userId { get; set; }
     }
 }

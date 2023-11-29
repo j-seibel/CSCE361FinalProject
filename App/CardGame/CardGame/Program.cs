@@ -1,8 +1,8 @@
 using CardGame.SQL;
-
-using System;
-using System.Net;
-using System.Net.Sockets;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net.WebSockets;
 
 namespace CardGame
@@ -14,11 +14,20 @@ namespace CardGame
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Add CORS here
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost3000", builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
             var app = builder.Build();
 
@@ -29,20 +38,21 @@ namespace CardGame
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseAuthorization();
             app.UseWebSockets();
 
+            // Use CORS before MapControllers
+            app.UseCors("AllowLocalhost3000");
 
             app.MapControllers();
 
-            DataInserter.addPlayer("splash36", "abc1234");
+
+            ConnectionAccessor.TestDatabaseConnection();
 
 
             app.Run();
-
-            
         }
     }
 }

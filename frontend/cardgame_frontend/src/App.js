@@ -1,20 +1,48 @@
+// importing CSS
 import './App.css';
-import Home from "./pages/home.js"
-import Deck from './components/deck'
-import { Navigate, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// importing components
+import Deck from './components/deck';
+import Forms from './components/Forms';
+
+// importing Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Route, Routes } from "react-router-dom"
+
+// importing RoomPage
+import RoomPage from './pages/roomPage';
 
 function App() {
+
+  function uuid() {
+    var S4 = () => {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return (
+      S4() +
+      S4() +
+      "-" +
+      S4() +
+      "-" +
+      S4() +
+      "-" +
+      S4() +
+      "-" +
+      S4() +
+      S4() +
+      S4()
+    );
+  };
+
   return (
-    <Router>
+    <div className='container'>
       <Routes>
-        <Route path = '/home' element={<Home/>} /> 
-        <Route path = '/deck' element={<Deck/>} />
-        <Route path = '*' element={<Navigate to ='/'/>}/>
+        <Route path="/" element={<Forms uuid={uuid}/>} />
+        <Route path='/:roomId' element={<RoomPage />} />
       </Routes>
-    </Router>
-    // <Deck/>
-  );
+    </div>
+  )
 }
 
 export default App;
