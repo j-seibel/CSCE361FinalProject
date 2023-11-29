@@ -37,8 +37,6 @@ namespace CardGame
 
             app.MapControllers();
 
-            DataInserter.addPlayer("splash36", "abc1234");
-
 
             app.Run();
 
