@@ -4,6 +4,7 @@
     "\\App",
     "\\App\\CardGame",
     "\\App\\CardGame\\CardGame",
+    "\\App\\CardGame\\CardGame\\SQL",
     "\\frontend",
     "\\frontend\\cardgame_frontend"
   ],

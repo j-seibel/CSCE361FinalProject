@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 public class DataInserter
 {
 
-    public static void addPlayer(string username, string password)
+    public static void createPlayer(string username, string password)
     {
         string sql = "insert into Player (username, password) values (@username, @password);";
         SqlCommand cmd = new SqlCommand(sql, ConnectionAccessor.GetConnection());
@@ -53,11 +53,13 @@ public class DataInserter
             System.Diagnostics.Debug.WriteLine(ex);
         }
         ConnectionAccessor.CloseConnection();
+
+        int roomId = DataLoader.getRoomId(roomCode);
+        DataInserter.createPlayerRoomConnection(hostId, roomId);
     }
 
-    public static void playerJoinRoom(string username, string roomCode)
+    public static void createPlayerRoomConnection(string username, int roomId)
     {
-        int roomId = DataLoader.getRoomId(roomCode);
         string sql = "update Player set roomId = @roomId where username = @username;";
         SqlCommand cmd = new SqlCommand(sql, ConnectionAccessor.GetConnection());
         SqlParameter[] param = new SqlParameter[2];
@@ -65,6 +67,81 @@ public class DataInserter
         param[1] = new SqlParameter("roomId", roomId);
         cmd.Parameters.AddWithValue("@username", username);
         cmd.Parameters.AddWithValue("@roomId", roomId);
+        try
+        {
+            ConnectionAccessor.CreateConnection();
+            cmd.ExecuteNonQuery();
+            System.Diagnostics.Debug.WriteLine("Inserted Succesfully!\n");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
+        ConnectionAccessor.CloseConnection();
+    }
+
+    public static void addNumPlayerRoom(int roomId)
+    {
+        int numPlayers = DataLoader.getNumPlayers(roomId) + 1;
+        string sql = "update Room set numPlayers = @numPlayers where roomId = @roomId;";
+        SqlCommand cmd = new SqlCommand(sql, ConnectionAccessor.GetConnection());
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@numPlayers", numPlayers);
+        param[1] = new SqlParameter("roomId", roomId);
+        cmd.Parameters.AddWithValue("@numPlayers", numPlayers);
+        cmd.Parameters.AddWithValue("@roomId", roomId);
+        try
+        {
+            ConnectionAccessor.CreateConnection();
+            cmd.ExecuteNonQuery();
+            System.Diagnostics.Debug.WriteLine("Inserted Succesfully!\n");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
+        ConnectionAccessor.CloseConnection();
+    }
+
+    public static void removeNumPlayerRoom(int roomId)
+    {
+        int numPlayers = DataLoader.getNumPlayers(roomId) - 1;
+        string sql = "update Room set numPlayers = @numPlayers where roomId = @roomId;";
+        SqlCommand cmd = new SqlCommand(sql, ConnectionAccessor.GetConnection());
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@numPlayers", numPlayers);
+        param[1] = new SqlParameter("roomId", roomId);
+        cmd.Parameters.AddWithValue("@numPlayers", numPlayers);
+        cmd.Parameters.AddWithValue("@roomId", roomId);
+        try
+        {
+            ConnectionAccessor.CreateConnection();
+            cmd.ExecuteNonQuery();
+            System.Diagnostics.Debug.WriteLine("Inserted Succesfully!\n");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
+        ConnectionAccessor.CloseConnection();
+    }
+
+    public static void playerJoinRoom(string username, string roomCode)
+    {
+        int roomId = DataLoader.getRoomId(roomCode);
+        DataInserter.addNumPlayerRoom(roomId);
+        DataInserter.createPlayerRoomConnection(username, roomId);
+    }
+
+    public static void playerLeaveRoom(string username, string roomCode)
+    {
+        int roomId = DataLoader.getRoomId(roomCode);
+        DataInserter.removeNumPlayerRoom(roomId);
+        string sql = "update Player set roomId = NULL where username = @username;";
+        SqlCommand cmd = new SqlCommand(sql, ConnectionAccessor.GetConnection());
+        SqlParameter[] param = new SqlParameter[1];
+        param[0] = new SqlParameter("@username", username);
+        cmd.Parameters.AddWithValue("@username", username);
         try
         {
             ConnectionAccessor.CreateConnection();
