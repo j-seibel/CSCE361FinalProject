@@ -39,7 +39,7 @@ function App() {
     <div className='container'>
       <Routes>
         <Route path="/" element={<Forms uuid={uuid}/>} />
-        <Route path='/:roomId' element={<RoomPage />} />
+        <Route path='/:roomID' element={<RoomPage />} />
       </Routes>
     </div>
   )
