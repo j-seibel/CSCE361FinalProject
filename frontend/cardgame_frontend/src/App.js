@@ -4,6 +4,7 @@ import './App.css';
 // importing components
 import Deck from './components/deck';
 import Forms from './components/Forms';
+import Solitaire from './components/solitaire.js'
 
 // importing Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,7 +40,8 @@ function App() {
     <div className='container'>
       <Routes>
         <Route path="/" element={<Forms uuid={uuid}/>} />
-        <Route path='/:roomID' element={<RoomPage />} />
+        <Route path='/:roomId' element={<RoomPage />} />
+        <Route path='/solitaire' element={<Solitaire/>}/>
       </Routes>
     </div>
   )
