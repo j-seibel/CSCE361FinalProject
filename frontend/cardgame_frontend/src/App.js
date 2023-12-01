@@ -16,6 +16,7 @@ import RoomPage from './pages/roomPage';
 
 function App() {
 
+
   function uuid() {
     var S4 = () => {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -40,7 +41,7 @@ function App() {
     <div className='container'>
       <Routes>
         <Route path="/" element={<Forms uuid={uuid}/>} />
-        <Route path='/:roomId' element={<RoomPage />} />
+        <Route path='/:roomID' element={<RoomPage />} />
         <Route path='/solitaire' element={<Solitaire/>}/>
       </Routes>
     </div>
