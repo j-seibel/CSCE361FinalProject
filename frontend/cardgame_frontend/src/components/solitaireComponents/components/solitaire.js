@@ -848,73 +848,40 @@ class Solitaire extends Component {
 
     render() {
         return (
-            <div className="App">
-                <div className="newGame">
-                    <button onClick={this.resetGame}>New Game</button>
-                </div>
-                <div id="currentTime" className="timer">
-                    Time: {this.formatTime(this.state.time)}
-                </div>
-                <div id="bestTime" className="timer">
-                    Best Time:
-                    {
-                        localStorage.getItem('best-time') != null ? (
-                            this.formatTime(localStorage.getItem('best-time'))
-                        ) : null
-                    }
-                </div>
-                <div style={{ position: 'relative', top: 10 }}>
-                    {this.mapDrawCards(this.state.drawCards)}
-                    {
-                        this.state.drawCards.length === 0 ? (
-                            <div
-                                style={{
-                                    width: '127px',
-                                    borderRadius: '5px',
-                                    height: '181px',
-                                    border: '2px solid black',
-                                    position: 'absolute',
-                                    padding: '5px',
-                                    fontSize: 60,
-                                    cursor: 'pointer'
-                                }}
-                                onClick={this.resetDrawCards}
-                            >
-                                <span style={{ top: '50px', left: '35px', position: 'absolute' }}>&#9711;</span>
-                            </div>
-                        ) : null
-                    }
-                </div>
-                <div style={{ left: 200, position: 'relative', top: 10 }}>
-                    <div style={{ zIndex: 0 }}>{this.mapDrawCards(this.state.usedDrawCards)}</div>
-                    <div style={{ zIndex: 10 }}>{this.mapDrawCards(this.state.upDrawCards)}</div>
-                </div>
-                <div style={{ position: 'absolute', right: 122, top: 10 }}>
-                    <table style={{ maxWidth: 700, position: 'relative', float: 'right' }}>
-                        <tbody>
+            <div>
+
+                <div style={{ position: 'absolute', left: 0, top: 5 }}>
+                    {/* <table style={{ maxWidth: 700, position: 'relative', float: 'right' }}> */}
+                        {/* <tbody> */}
                             <tr>
-                                <td style={{ position: 'relative', width: 175 }}>
+                                <td style={{ position: 'relative', width: 175, height : 185 }}>
                                     {this.state.up_1.length === 0 ? (<CardOutline />) : null}
                                     {this.mapCards(this.state.up_1)}
                                     <div style={{ display: this.state.showUpperDrops ? 'block' : 'none' }}>
                                         <DropSpot Position={'relative'} UpperDrop={true} Column={'up_1'} Index={1000} />
                                     </div>
                                 </td>
-                                <td style={{ position: 'relative', width: 175 }}>
+                            </tr>
+                            <tr>
+                                <td style={{ position: 'relative', width: 175, height : 185}}>
                                     {this.state.up_2.length === 0 ? (<CardOutline />) : null}
                                     {this.mapCards(this.state.up_2)}
                                     <div style={{ display: this.state.showUpperDrops ? 'block' : 'none' }}>
                                         <DropSpot Position={'relative'} UpperDrop={true} Column={'up_2'} Index={1000} />
                                     </div>
                                 </td>
-                                <td style={{ position: 'relative', width: 175 }}>
+                            </tr>
+                            <tr>
+                                <td style={{ position: 'relative', width: 175, height : 185 }}>
                                     {this.state.up_3.length === 0 ? (<CardOutline />) : null}
                                     {this.mapCards(this.state.up_3)}
                                     <div style={{ display: this.state.showUpperDrops ? 'block' : 'none' }}>
                                         <DropSpot Position={'relative'} UpperDrop={true} Column={'up_3'} Index={1000} />
                                     </div>
                                 </td>
-                                <td style={{ position: 'relative', width: 175 }}>
+                            </tr>
+                            <tr>
+                                <td style={{ position: 'relative', width: 175, height : 180 }}>
                                     {this.state.up_4.length === 0 ? (<CardOutline />) : null}
                                     {this.mapCards(this.state.up_4)}
                                     <div style={{ display: this.state.showUpperDrops ? 'block' : 'none' }}>
@@ -922,43 +889,90 @@ class Solitaire extends Component {
                                     </div>
                                 </td>
                             </tr>
+                        {/* </tbody> */}
+                    {/* </table> */}
+                </div>
+
+                <div className="App">
+                    <div className="newGame">
+                        <button onClick={this.resetGame}>New Game</button>
+                    </div>
+                    <div id="currentTime" className="timer">
+                        Time: {this.formatTime(this.state.time)}
+                    </div>
+                    <div id="bestTime" className="timer">
+                        Best Time:
+                        {
+                            localStorage.getItem('best-time') != null ? (
+                                this.formatTime(localStorage.getItem('best-time'))
+                            ) : null
+                        }
+                    </div>
+                    <div style={{ position: 'relative', top: 10 }}>
+                        {this.mapDrawCards(this.state.drawCards)}
+                        {
+                            this.state.drawCards.length === 0 ? (
+                                <div
+                                    style={{
+                                        width: '127px',
+                                        borderRadius: '5px',
+                                        height: '181px',
+                                        border: '2px solid black',
+                                        position: 'absolute',
+                                        padding: '5px',
+                                        fontSize: 60,
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={this.resetDrawCards}
+                                >
+                                    <span style={{ top: '50px', left: '35px', position: 'absolute' }}>&#9711;</span>
+                                </div>
+                            ) : null
+                        }
+                    </div>
+                    <div style={{ left: 200, position: 'relative', top: 10 }}>
+                        <div style={{ zIndex: 0 }}>{this.mapDrawCards(this.state.usedDrawCards)}</div>
+                        <div style={{ zIndex: 10 }}>{this.mapDrawCards(this.state.upDrawCards)}</div>
+                    </div>
+
+                    <table style={{ width: '100%', position: 'relative', top: '225px', maxWidth: '1375px', float: 'right' }}>
+                        <tbody>
+                            <tr>
+                                <td style={{ position: 'relative' }}>
+                                    {this.state.col_1.length === 0 ? (<CardOutline />) : null}
+                                    {this.mapCards(this.state.col_1)}
+                                </td>
+                                <td style={{ position: 'relative' }}>
+                                    {this.state.col_2.length === 0 ? (<CardOutline />) : null}
+                                    {this.mapCards(this.state.col_2)}
+                                </td>
+                                <td style={{ position: 'relative' }}>
+                                    {this.state.col_3.length === 0 ? (<CardOutline />) : null}
+                                    {this.mapCards(this.state.col_3)}
+                                </td>
+                                <td style={{ position: 'relative' }}>
+                                    {this.state.col_4.length === 0 ? (<CardOutline />) : null}
+                                    {this.mapCards(this.state.col_4)}
+                                </td>
+                                <td style={{ position: 'relative' }}>
+                                    {this.state.col_5.length === 0 ? (<CardOutline />) : null}
+                                    {this.mapCards(this.state.col_5)}
+                                </td>
+                                <td style={{ position: 'relative' }}>
+                                    {this.state.col_6.length === 0 ? (<CardOutline />) : null}
+                                    {this.mapCards(this.state.col_6)}
+                                </td>
+                                <td style={{ position: 'relative' }}>
+                                    {this.state.col_7.length === 0 ? (<CardOutline />) : null}
+                                    {this.mapCards(this.state.col_7)}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
+
+
                 </div>
-                <table style={{ width: '100%', position: 'relative', top: '225px', maxWidth: '1375px', float: 'right' }}>
-                    <tbody>
-                        <tr>
-                            <td style={{ position: 'relative' }}>
-                                {this.state.col_1.length === 0 ? (<CardOutline />) : null}
-                                {this.mapCards(this.state.col_1)}
-                            </td>
-                            <td style={{ position: 'relative' }}>
-                                {this.state.col_2.length === 0 ? (<CardOutline />) : null}
-                                {this.mapCards(this.state.col_2)}
-                            </td>
-                            <td style={{ position: 'relative' }}>
-                                {this.state.col_3.length === 0 ? (<CardOutline />) : null}
-                                {this.mapCards(this.state.col_3)}
-                            </td>
-                            <td style={{ position: 'relative' }}>
-                                {this.state.col_4.length === 0 ? (<CardOutline />) : null}
-                                {this.mapCards(this.state.col_4)}
-                            </td>
-                            <td style={{ position: 'relative' }}>
-                                {this.state.col_5.length === 0 ? (<CardOutline />) : null}
-                                {this.mapCards(this.state.col_5)}
-                            </td>
-                            <td style={{ position: 'relative' }}>
-                                {this.state.col_6.length === 0 ? (<CardOutline />) : null}
-                                {this.mapCards(this.state.col_6)}
-                            </td>
-                            <td style={{ position: 'relative' }}>
-                                {this.state.col_7.length === 0 ? (<CardOutline />) : null}
-                                {this.mapCards(this.state.col_7)}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            
             </div>
         );
     }

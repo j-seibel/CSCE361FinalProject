@@ -9,8 +9,7 @@ body {
 }
 
 .App {
-    width: 90%;
-    margin: auto;
+    margin-left : 200px;
 }
 
 .card {
