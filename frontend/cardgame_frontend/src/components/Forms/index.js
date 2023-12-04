@@ -1,10 +1,9 @@
 import "./index.css";
 import CreateRoomForm from "./CreateRoomForm";
 import JoinRoomForm from "./JoinRoomForm";
+import Solitaire from "../solitaireComponents/components/solitaire"
 
 function Forms({uuid}) {
-
-    
 
     return (
         <div>

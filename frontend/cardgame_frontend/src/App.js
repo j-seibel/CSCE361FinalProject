@@ -1,10 +1,11 @@
 // importing CSS
 import './App.css';
+import HTML5Backend from 'react-dnd-html5-backend'
 
+import { DndContext, DndProvider, DragDropContext } from 'react-dnd';
 // importing components
-import Deck from './components/deck';
 import Forms from './components/Forms';
-import Solitaire from './components/solitaire.js'
+import Solitaire from './components/solitaireComponents/components/solitaire.js'
 
 // importing Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -48,4 +49,4 @@ function App() {
   )
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);
