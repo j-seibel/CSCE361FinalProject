@@ -1,4 +1,4 @@
-﻿namespace CardGame.Model
+﻿namespace CardGame.DataModels
 {
     public class Room
     {

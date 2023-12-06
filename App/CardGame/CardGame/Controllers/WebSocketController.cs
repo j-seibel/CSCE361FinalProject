@@ -21,7 +21,7 @@ namespace WebSocketsSample.Controllers
             {
                 var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
                 connections.Add(webSocket);
-                await Echo(webSocket);
+                await broadcastGameState(webSocket);
                 return Ok();
             }
             else
@@ -30,7 +30,7 @@ namespace WebSocketsSample.Controllers
             }
         }
 
-        private static async Task Echo(WebSocket webSocket)
+        private static async Task broadcastGameState(WebSocket webSocket)
         {
             var buffer = new byte[1024 * 4];
 
@@ -56,7 +56,6 @@ namespace WebSocketsSample.Controllers
                 {
                     await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
                     connections.Remove(webSocket);
-                    break;
                 }
             }
         }
