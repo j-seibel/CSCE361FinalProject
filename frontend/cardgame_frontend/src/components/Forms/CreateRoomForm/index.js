@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-toastify";
 
 
 function CreateRoomForm({uuid}) {
@@ -94,12 +95,17 @@ function CreateRoomForm({uuid}) {
                         </button>
 
                         {/* Creating the copy button */}
+                        <CopyToClipboard
+                            text={roomID}
+                            onCopy={() => toast.success("Room Id Copied To Clipboard!")}
+                            >
                         <button 
                             className="btn btn-outline-danger btn-sm me-2" 
                             type="button"
                         >
                             copy
                         </button>
+                        </CopyToClipboard>
                     </div>
                 </div>
             </div>
