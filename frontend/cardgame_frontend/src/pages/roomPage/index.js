@@ -1,11 +1,12 @@
 import React from "react";
 import "./index.css";
-
-
+import War from "./war.js"; 
 function RoomPage() {
     return (
-        <div>This is the new page for the game</div>
-    )
+        <div>
+            <War />
+        </div>
+    );
 }
 
-export default RoomPage
+export default RoomPage;
