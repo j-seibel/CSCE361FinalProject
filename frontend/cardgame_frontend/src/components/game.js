@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Deck from "./deck";
 
-export default function Game() {
+export default function Game(props) {
     return (
         <div>
-            <Deck/>
+            <Deck client = {props.client}/>
         </div>
     )
 }

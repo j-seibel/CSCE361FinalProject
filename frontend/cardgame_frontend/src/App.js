@@ -20,15 +20,6 @@ const client = new W3CWebSocket('ws://localhost:5237/ws');
 
 function App() {
 
-  useEffect( ()=> {
-    client.onopen = () => {
-      console.log('WebSocket Client Connected');
-    };
-    client.onmessage = (message) => {
-      console.log(message);
-    };
-  }, [])
-
   function uuid() {
     var S4 = () => {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -53,7 +44,7 @@ function App() {
     <div className='container'>
       <Routes>
         <Route path="/" element={<Forms uuid={uuid}/>} />
-        <Route path='/:roomID' element={<RoomPage />} />
+        <Route path='/:roomID' element={<RoomPage client = {client}/>} />
         <Route path='/solitaire' element={<Solitaire/>}/>
       </Routes>
     </div>

@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import "./deck.css"
+
+import client from "../App.js"
 
 import back from './../cards/PNG-cards-1.3/back.png';
 import h1 from './../cards/PNG-cards-1.3/1_of_hearts.png';
@@ -120,7 +122,6 @@ const values = ["ace", "two", "three", "four", "five", "six", "seven", "eight", 
 
 function getCardIMG({card}) {
   var val = "";
-  
   var suit = card.suit[0].toLowerCase();
   
   for (var i = 0; i < 13; i++) {
@@ -153,40 +154,54 @@ function shuffle(array) {
   return array;
 }
 
-function Deck(){
-
+function Deck(props){
   // state of the deck component
-  const [deck, setDeck] = useState([]);
+  const [deck, setDeck] = useState( () => {
+    const d = [];
+
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 13; j++){
+            d.push({
+                "suit" : suits[i],
+                "value" : values[j],
+            })
+        }
+    }
+
+    shuffle(d);
+    return d;
+  });
   const [pile1, setPile1] = useState([]);
   const [pile2, setPile2] = useState([]);
   const [hasWon, setHasWon] = useState(0);
 
   // this is a constructor for the deck component
   useEffect(() => {
-      const initializeDeck = () => {
-          const d = [];
-
-          for (var i = 0; i < 4; i++) {
-              for (var j = 0; j < 13; j++){
-                  d.push({
-                      "suit" : suits[i],
-                      "value" : values[j],
-                  })
-              }
-          }
-
-          shuffle(d);
-          setDeck(d);
-      }
-
-      initializeDeck();
       setPile1(deck.slice(0, 26));
       setPile2(deck.slice(26));
-      
+
+
+
+
+        client.onopen = () => {
+          console.log('WebSocket Client Connected');
+        };
+        client.onmessage = (message) => {
+          console.log(message);
+        };
   }, []);
 
 
+
   const handleNextClick = () => {
+    if (pile1.length === 0) {
+      setHasWon(2);
+    } else if (pile2.length === 0) {
+      setHasWon(1);
+    }
+    if (pile1.length === 0 || pile2.length === 0) {
+      return;
+    }
     let a = pile1[0]
     let b = pile2[0]
 
@@ -208,26 +223,25 @@ function Deck(){
       
       setPile1(newPile1)
       setPile2(newPile2)
-    }
-    
-    if (pile1.length === 0) {
-      setHasWon(2);
-    } else if (pile2.length === 0) {
-      setHasWon(1);
+
+      console.log(pile1)
+      console.log(pile2)
+
     }
   };
-
-
-  
   
   return (
 
     <div>
+      <h1>WELCOME TO WAR</h1>
       <div>
-        {console.log(pile1)}
-        {console.log(pile2)}
+        
         {pile1.length > 0 ? <Card card = {pile1[0]}/> : <></>}
         {pile1.length > 0 ? <Card card = {pile2[0]}/> : <></>}
+
+        {hasWon == 1 ? <h1>PLAYER ONE HAS WON THE GAME</h1> : <></>}
+        {hasWon == 2 ? <h1>PLAYER TWO HAS WON THE GAME</h1> : <></>}
+
       </div>
       <div className = "container">
         <button onClick={handleNextClick} className = "btn btn-success btn-sm me-1 size-20px">Next</button>

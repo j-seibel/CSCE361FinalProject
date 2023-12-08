@@ -2,10 +2,10 @@ import React from "react";
 import "./index.css";
 import Game from "../../components/game";
 
-function RoomPage() {
+function RoomPage(props) {
     return (
         <div>
-            <Game/>
+            <Game client = {props.client}/>
         </div>
     )
 }
