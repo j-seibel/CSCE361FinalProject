@@ -11,16 +11,9 @@
 --     warELO int
 -- );
 
--- create table Room(
---     roomId int not null identity primary key,
---     roomCode VARCHAR(8),
---     gameType varchar(20),
---     numPlayers int
--- );
-
--- insert into Player(username, password, gamesPlayed, gamesWon, solitaireELO, warELO) values ('cjdimes', 'jpxfrd', 5 , 4, 1300, 2500);
-
--- insert into Room(roomCode, gameType, numPlayers) values ('AMOGUS', 'Solitaire', 1);
-
-Select * from Player;
-Select * from Room;
+create table Room(
+    roomId int not null identity primary key,
+    hostId VARCHAR(26),
+    roomCode VARCHAR(26),
+    numPlayers int
+);
