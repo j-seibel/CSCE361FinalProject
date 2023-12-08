@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import "./deck.css"
 
 import back from './../cards/PNG-cards-1.3/back.png';
-
 import h1 from './../cards/PNG-cards-1.3/1_of_hearts.png';
 import h2 from './../cards/PNG-cards-1.3/2_of_hearts.png';
 import h3 from './../cards/PNG-cards-1.3/3_of_hearts.png';
@@ -134,19 +134,40 @@ function getCardIMG({card}) {
 function Card({card}) {
   var s = getCardIMG({card});
   return (
-    <img src={map.get(s)} className = "card"/>
+    <img src={map.get(s)}/>
   )
 }
+
+function shuffle(array) {
+  let idx = array.length,  randomIndex;
+
+  while (idx > 0) {
+
+    randomIndex = Math.floor(Math.random() * idx);
+    idx--;
+
+    [array[idx], array[randomIndex]] = [
+      array[randomIndex], array[idx]];
+  }
+
+  return array;
+}
+
+
 
 function Deck(){
 
   // state of the deck component
   const [deck, setDeck] = useState([]);
+  const [pile1, setPile1] = useState([]);
+  const [pile2, setPile2] = useState([]);
+  const [hasWon, setHasWon] = useState(0);
 
   // this is a constructor for the deck component
   useEffect(() => {
       const initializeDeck = () => {
           const d = [];
+
           for (var i = 0; i < 4; i++) {
               for (var j = 0; j < 13; j++){
                   d.push({
@@ -155,23 +176,57 @@ function Deck(){
                   })
               }
           }
+
+          shuffle(d);
           setDeck(d);
       }
+
       initializeDeck();
+      setPile1(deck.slice(0, 26));
+      setPile2(deck.slice(26));
+      
   }, []);
+
+
+  const handleNextClick = () => {
+    let a = pile1[0]
+    let b = pile2[0]
+
+    if (values.indexOf(a.value) > values.indexOf(b.value)) {
+      let newPile1 = pile1.slice(1)
+      let newPile2 = pile2.slice(1)
+
+      newPile1.push(b)
+      newPile1.push(a)      
+
+      setPile1(newPile1)
+      setPile2(newPile2)
+    } else {
+      let newPile2 = pile2.slice(1)
+      let newPile1 = pile1.slice(1)
+
+      newPile2.push(a)
+      newPile2.push(b)
+      
+      setPile1(newPile1)
+      setPile2(newPile2)
+    }
+    console.log(pile1, pile2)
+  };
   
   return (
     <div>
-      {deck.length > 0 ? <img src={back} className="deck"/> : <></>}
-      {deck.length > 0 ? <Card card={deck[0]}/> : <></>}
-      {deck.length > 0 ? <Card card={deck[1]}/> : <></>}
-      {deck.length > 0 ? <Card card={deck[2]}/> : <></>}
-      {deck.length > 0 ? <Card card={deck[3]}/> : <></>}
-      {deck.length > 0 ? <Card card={deck[4]}/> : <></>}
-
+      <div>
+        {pile1.length > 0 ? <Card card = {pile1[0]}/> : <></>}
+        {pile1.length > 0 ? <Card card = {pile2[0]}/> : <></>}
+      </div>
+      <div className = "container">
+        <button onClick={handleNextClick} className = "btn btn-success btn-sm me-1 size-20px">Next</button>
+      </div>
+      
     </div>
-  );
 
+  );
 }
 
 export default Deck

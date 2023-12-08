@@ -1,10 +1,12 @@
 import React from "react";
 import "./index.css";
-
+import Game from "../../components/game";
 
 function RoomPage() {
     return (
-        <div>THis is the new page for the game</div>
+        <div>
+            <Game/>
+        </div>
     )
 }
 

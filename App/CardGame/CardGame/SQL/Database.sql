@@ -1,16 +1,15 @@
-drop table if exists Player;
-drop table if exists Room;
+-- drop table if exists Player;
+-- drop table if exists Room;
 
-create table Player(
-    playerId int not null identity primary key,
-    roomId int,
-    username VARCHAR(50),
-    password VARCHAR(50),
-    gamesPlayed int,
-    gamesWon int,
-    solitaireELO int,
-    warELO int
-);
+-- create table Player(
+--     playerId int not null identity primary key,
+--     username VARCHAR(50),
+--     password VARCHAR(50),
+--     gamesPlayed int,
+--     gamesWon int,
+--     solitaireELO int,
+--     warELO int
+-- );
 
 create table Room(
     roomId int not null identity primary key,

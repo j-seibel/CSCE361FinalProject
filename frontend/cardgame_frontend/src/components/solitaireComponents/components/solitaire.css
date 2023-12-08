@@ -1,0 +1,58 @@
+html {
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    user-select: none !important;
+    height: 100%;
+}
+
+.App {
+    margin-left : 200px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #bababa;
+    border-radius: 5px;
+    width: 100%;
+    height: 181px;
+    padding: 5px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.timer {
+    position: absolute;
+    bottom: 0;
+    width: 0%;
+    height: 0px;
+}
+
+#currentTime {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0px;
+}
+
+#bestTime {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    height: 0px;
+}
+
+.newGame {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+}
+
+.newGame button {
+    padding: 5px 10px;
+}

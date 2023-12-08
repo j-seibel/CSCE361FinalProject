@@ -48,11 +48,9 @@ namespace CardGame
 
             app.MapControllers();
 
-
             ConnectionAccessor.TestDatabaseConnection();
             
             DataInserter.playerLeaveRoom("splash35", "DJSDNKD");
-
 
             app.Run();
         }
