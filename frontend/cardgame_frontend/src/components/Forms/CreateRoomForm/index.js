@@ -4,9 +4,9 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 
 
-function CreateRoomForm({uuid}) {
+function CreateRoomForm(props) {
 
-    const [roomID, setRoomID] = useState(uuid());
+    const [roomID, setRoomID] = useState(props.uuid());
     const [name,setName] = useState("");
     const navigate = useNavigate()
 
@@ -15,7 +15,7 @@ function CreateRoomForm({uuid}) {
         const RoomData = {
             name,
             roomID,
-            userId: uuid(),
+            userId: props.uuid(),
             // host: true,
             // presenter: true,
         }
@@ -34,6 +34,9 @@ function CreateRoomForm({uuid}) {
                 },
                 body: JSON.stringify(room),
             });
+
+            props.client.send("SDLFKJSDL:FKJ")
+
             console.log(room)
             console.log('Response status:', response.status);
             console.log('Response headers:', response.headers);
@@ -88,7 +91,7 @@ function CreateRoomForm({uuid}) {
                         {/* Creating the generate button */}
                         <button 
                             className="btn btn-success btn-sm me-1" 
-                            onClick={() => setRoomID(uuid())}
+                            onClick={() => setRoomID(props.uuid())}
                             type="button"
                         >
                             generate
