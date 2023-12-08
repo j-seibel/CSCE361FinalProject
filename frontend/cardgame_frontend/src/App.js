@@ -43,7 +43,7 @@ function App() {
   return (
     <div className='container'>
       <Routes>
-        <Route path="/" element={<Forms uuid={uuid}/>} />
+        <Route path="/" element={<Forms uuid={uuid} client = {client}/>} />
         <Route path='/:roomID' element={<RoomPage client = {client}/>} />
         <Route path='/solitaire' element={<Solitaire/>}/>
       </Routes>

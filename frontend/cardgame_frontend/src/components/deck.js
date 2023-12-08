@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import "./deck.css"
 
-import client from "../App.js"
-
 import back from './../cards/PNG-cards-1.3/back.png';
 import h1 from './../cards/PNG-cards-1.3/1_of_hearts.png';
 import h2 from './../cards/PNG-cards-1.3/2_of_hearts.png';
@@ -175,18 +173,14 @@ function Deck(props){
   const [pile2, setPile2] = useState([]);
   const [hasWon, setHasWon] = useState(0);
 
-  // this is a constructor for the deck component
   useEffect(() => {
       setPile1(deck.slice(0, 26));
       setPile2(deck.slice(26));
 
-
-
-
-        client.onopen = () => {
+        props.client.onopen = () => {
           console.log('WebSocket Client Connected');
         };
-        client.onmessage = (message) => {
+        props.client.onmessage = (message) => {
           console.log(message);
         };
   }, []);

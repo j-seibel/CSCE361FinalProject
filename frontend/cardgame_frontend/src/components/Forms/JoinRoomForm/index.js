@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function JoinRoomForm({uuid}) {
+function JoinRoomForm(props) {
 
     const [roomID, setRoomID] = useState("");
     const [name,setName] = useState("");
@@ -13,7 +13,7 @@ function JoinRoomForm({uuid}) {
         const RoomData = {
             name,
             roomID,
-            userId: uuid(),
+            userId: props.uuid(),
         }
         
         navigate(roomID)
@@ -29,6 +29,9 @@ function JoinRoomForm({uuid}) {
                 },
                 body: JSON.stringify(room),
             });
+            
+            props.client.send(RoomData)
+
             console.log(room)
             console.log('Response status:', response.status);
             console.log('Response headers:', response.headers);
