@@ -4,7 +4,7 @@ import "./index.css";
 
 function RoomPage() {
     return (
-        <div>THis is the new page for the game</div>
+        <div>This is the new page for the game</div>
     )
 }
 
