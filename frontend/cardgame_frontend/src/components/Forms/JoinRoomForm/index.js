@@ -21,7 +21,7 @@ function JoinRoomForm(props) {
         const createRoom = async () => {
             try {
                 const room = RoomData
-            const response = await fetch('http://localhost:8080/api/Room', {
+            const response = await fetch('http://localhost:5237/api/Room', {
                 method: 'POST',
                 headers: {
                 'Accept': '*/*',
@@ -30,7 +30,7 @@ function JoinRoomForm(props) {
                 body: JSON.stringify(room),
             });
             
-            props.client.send(RoomData)
+            props.client.send(JSON.stringify(RoomData))
 
             console.log(room)
             console.log('Response status:', response.status);

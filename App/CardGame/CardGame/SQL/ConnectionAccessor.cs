@@ -12,7 +12,7 @@ namespace CardGame.SQL
 
         private static SqlConnection _connection =
             new(
-                "Data Source =CONNORM-LAPTOP\\SQLEXPRESS;initial catalog = master; trusted_connection=true");
+                "Data Source =LAPTOP\\SQLEXPRESS;initial catalog = master; trusted_connection=true");
 
         public static void TestDatabaseConnection()
         {

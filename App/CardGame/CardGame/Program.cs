@@ -50,7 +50,7 @@ namespace CardGame
 
             ConnectionAccessor.TestDatabaseConnection();
             
-           // DataInserter.playerLeaveRoom("splash35", "DJSDNKD");
+            //DataInserter.playerLeaveRoom("splash35", "DJSDNKD");
 
             app.Run();
         }
