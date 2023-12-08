@@ -16,13 +16,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 // importing RoomPage
 import RoomPage from './pages/roomPage';
 
-
 const client = new W3CWebSocket('ws://localhost:5237/ws');
-
-client.onmessage = (message) => {
-  const data = JSON.parse(message.data);
-  console.log(data)
-}
 
 function App() {
 

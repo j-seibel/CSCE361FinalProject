@@ -153,8 +153,6 @@ function shuffle(array) {
   return array;
 }
 
-
-
 function Deck(){
 
   // state of the deck component
@@ -211,19 +209,29 @@ function Deck(){
       setPile1(newPile1)
       setPile2(newPile2)
     }
-    console.log(pile1, pile2)
+    
+    if (pile1.length === 0) {
+      setHasWon(2);
+    } else if (pile2.length === 0) {
+      setHasWon(1);
+    }
   };
+
+
+  
   
   return (
+
     <div>
       <div>
+        {console.log(pile1)}
+        {console.log(pile2)}
         {pile1.length > 0 ? <Card card = {pile1[0]}/> : <></>}
         {pile1.length > 0 ? <Card card = {pile2[0]}/> : <></>}
       </div>
       <div className = "container">
         <button onClick={handleNextClick} className = "btn btn-success btn-sm me-1 size-20px">Next</button>
       </div>
-      
     </div>
 
   );

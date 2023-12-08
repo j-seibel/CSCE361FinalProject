@@ -15,9 +15,9 @@ function JoinRoomForm({uuid}) {
             roomID,
             userId: uuid(),
         }
-
-        navigate(roomID)
         
+        navigate(roomID)
+
         const createRoom = async () => {
             try {
                 const room = RoomData
