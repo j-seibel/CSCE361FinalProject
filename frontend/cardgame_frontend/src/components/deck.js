@@ -161,6 +161,7 @@ function Deck(){
   const [deck, setDeck] = useState([]);
   const [pile1, setPile1] = useState([]);
   const [pile2, setPile2] = useState([]);
+  const [hasWon, setHasWon] = useState(0);
 
   // this is a constructor for the deck component
   useEffect(() => {
@@ -188,35 +189,38 @@ function Deck(){
 
 
   const handleNextClick = () => {
-
-
+    let a = pile1[0]
+    let b = pile2[0]
 
     if (values.indexOf(a.value) > values.indexOf(b.value)) {
-      let newPile1 = pile1.slice()
-      let newPile2 = pile2.slice()
-      newPile1.push(newPile2[0])
-      newPile2 = newPile2.slice(1)
+      let newPile1 = pile1.slice(1)
+      let newPile2 = pile2.slice(1)
+
+      newPile1.push(b)
+      newPile1.push(a)      
+
       setPile1(newPile1)
       setPile2(newPile2)
     } else {
-      let newPile2 = pile2.slice()
-      let newPile1 = pile1.slice()
-      newPile2.push(newPile1[0])
-      newPile1 = newPile1.slice(1)
-      setPile1(newPile2)
-      setPile2(newPile1)
+      let newPile2 = pile2.slice(1)
+      let newPile1 = pile1.slice(1)
+
+      newPile2.push(a)
+      newPile2.push(b)
+      
+      setPile1(newPile1)
+      setPile2(newPile2)
     }
+    console.log(pile1, pile2)
   };
   
   return (
     <div>
-      
       <div>
         {pile1.length > 0 ? <Card card = {pile1[0]}/> : <></>}
         {pile1.length > 0 ? <Card card = {pile2[0]}/> : <></>}
       </div>
-      
-      <div>
+      <div className = "container">
         <button onClick={handleNextClick} className = "btn btn-success btn-sm me-1 size-20px">Next</button>
       </div>
       
