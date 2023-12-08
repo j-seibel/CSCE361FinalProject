@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useWebSocket from 'react-use-websocket';
 
 function JoinRoomForm({uuid}) {
 
@@ -10,6 +9,7 @@ function JoinRoomForm({uuid}) {
 
     function handleRoomJoin(e) {
         e.preventDefault();
+
         const RoomData = {
             name,
             roomID,
@@ -17,9 +17,7 @@ function JoinRoomForm({uuid}) {
         }
 
         navigate(roomID)
-        const ws_URL = 'ws://localhost:5237/ws';
-        useWebSocket(ws_URL, {onOpen: ()=>{console.log("CONNECTED TO WEBSOCKET")}});
-
+        
         const createRoom = async () => {
             try {
                 const room = RoomData

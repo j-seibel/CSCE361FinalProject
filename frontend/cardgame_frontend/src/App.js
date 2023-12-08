@@ -9,14 +9,26 @@ import Solitaire from './components/solitaireComponents/components/solitaire.js'
 
 // importing Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useEffect } from 'react';
 import { Route, Routes } from "react-router-dom"
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 // importing RoomPage
 import RoomPage from './pages/roomPage';
 
+
+const client = new W3CWebSocket('ws://localhost:5237/ws');
+
 function App() {
 
+  useEffect( ()=> {
+    client.onopen = () => {
+      console.log('WebSocket Client Connected');
+    };
+    client.onmessage = (message) => {
+      console.log(message);
+    };
+  }, [])
 
   function uuid() {
     var S4 = () => {

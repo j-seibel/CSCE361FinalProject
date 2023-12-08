@@ -5,7 +5,6 @@ export default function Game() {
   const [p1, setp1Deck] = useState([]);
   const [p2, setp2Deck] = useState([]);
   const [pages, setPages] = useState(0);
-
 }
 
 
