@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useWebSocket from 'react-use-websocket';
 
 function JoinRoomForm({uuid}) {
 
@@ -13,12 +14,11 @@ function JoinRoomForm({uuid}) {
             name,
             roomID,
             userId: uuid(),
-            // host: true,
-            // presenter: true,
         }
 
         navigate(roomID)
-
+        const ws_URL = 'ws://localhost:5237/ws';
+        useWebSocket(ws_URL, {onOpen: ()=>{console.log("CONNECTED TO WEBSOCKET")}});
 
         const createRoom = async () => {
             try {
@@ -41,13 +41,11 @@ function JoinRoomForm({uuid}) {
             }
         
             console.log('Post request successful');
-
-
-            } 
+            }
             
             
             catch (error) {
-            console.error('Error during POST request:', error.message);
+                console.error('Error during POST request:', error.message);
             }
         };
         createRoom()

@@ -18,6 +18,7 @@ function Forms({uuid}) {
                     <JoinRoomForm uuid={uuid}/>
                 </div>
             </div>
+            
             <div className="container">
                 <div className="center">
                     <button onClick={() => {window.location="/solitaire"}} className = "btn btn-success btn-sm me-1 size-100px">Play Solitaire Solo!</button>
