@@ -4,6 +4,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using CardGame.DataModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,43 +35,58 @@ namespace WebSocketsSample.Controllers
             }
         }
 
+     
+
         private static async Task broadcastGameState(WebSocket webSocket)
         {
-            var buffer = new byte[1024 * 4];
-
             while (true)
             {
+                var buffer = new byte[1024 * 4];
                 var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
-                if (result.MessageType == WebSocketMessageType.Text)
+                string receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                System.Diagnostics.Debug.WriteLine(receivedMessage);
+
+                dynamic jsonDynamic = JsonConvert.DeserializeObject(receivedMessage);
+                
+
+                if (jsonDynamic != null)
                 {
-                    string receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    Room r = JsonConvert.DeserializeObject<Room>(receivedMessage);
-                    
-                    if (!map.ContainsKey(r.name))
+                    if (jsonDynamic.ContainsKey("won"))
                     {
-                        map.Add(r.name, webSocket);
-                    }
-                    System.Diagnostics.Debug.WriteLine(map.Count);
-                    System.Diagnostics.Debug.WriteLine("FUCK THIS SHIT BRO");
-
-
-                    foreach (var socket in connections)
-                    {
-                        if (socket.State == WebSocketState.Open)
+                        State s = JsonConvert.DeserializeObject<State>(receivedMessage);
+                        System.Diagnostics.Debug.WriteLine(s.won);
+                        foreach (var socket in connections)
                         {
-                            await socket.SendAsync(
-                                new ArraySegment<byte>(buffer, 0, result.Count),
-                                result.MessageType,
-                                result.EndOfMessage,
-                                CancellationToken.None);
+                            if (socket.State == WebSocketState.Open && socket != webSocket)
+                            {
+                                await socket.SendAsync(
+                                    new ArraySegment<byte>(buffer, 0, result.Count),
+                                    result.MessageType,
+                                    result.EndOfMessage,
+                                    CancellationToken.None);
+                            }
                         }
+
                     }
-                }
-                else if (result.MessageType == WebSocketMessageType.Close)
-                {
-                    await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
-                    connections.Remove(webSocket);
+                    else if (result.MessageType == WebSocketMessageType.Text)
+                    {
+                        Room r = JsonConvert.DeserializeObject<Room>(receivedMessage);
+
+                        if (!map.ContainsKey(r.name))
+                        {
+                            map.Add(r.name, webSocket);
+                        }
+                        System.Diagnostics.Debug.WriteLine(map.Count);
+
+                        // Ensure you use a new buffer instance when sending messages
+                    }
+
+                    else if (result.MessageType == WebSocketMessageType.Close)
+                    {
+                        await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+                        connections.Remove(webSocket);
+                    }
                 }
             }
         }

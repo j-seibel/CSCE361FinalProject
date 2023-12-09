@@ -1,3 +1,25 @@
-.container {
+.card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 300px;
+    height:500px;
+    
+}
+
+.btn {
+    font-size : 40;
+}
+
+.gameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    height: 100vh;
+}
+
+.Imager {
+    display : flex;
+    justify-content: space-between;
 }

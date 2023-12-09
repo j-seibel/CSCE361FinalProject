@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import "./deck.css"
 
-import back from './../cards/PNG-cards-1.3/back.png';
 import h1 from './../cards/PNG-cards-1.3/1_of_hearts.png';
 import h2 from './../cards/PNG-cards-1.3/2_of_hearts.png';
 import h3 from './../cards/PNG-cards-1.3/3_of_hearts.png';
@@ -100,7 +100,6 @@ map.set('d10', d10);
 map.set('d11', d11);
 map.set('d12', d12);
 map.set('d13', d13);
-
 map.set('s1', s1);
 map.set('s2', s2);
 map.set('s3', s3);
@@ -133,7 +132,7 @@ function getCardIMG({card}) {
 function Card({card}) {
   var s = getCardIMG({card});
   return (
-    <img src={map.get(s)}/>
+    <img src={map.get(s)} className = "card"/>
   )
 }
 
@@ -153,7 +152,6 @@ function shuffle(array) {
 }
 
 function Deck(props){
-  // state of the deck component
   const [deck, setDeck] = useState( () => {
     const d = [];
 
@@ -169,79 +167,132 @@ function Deck(props){
     shuffle(d);
     return d;
   });
-  const [pile1, setPile1] = useState([]);
-  const [pile2, setPile2] = useState([]);
+  const [pile1, setPile1] = useState(() => {
+    return deck.slice(0, 26);
+  });
+  const [pile2, setPile2] = useState(() => {
+    return deck.slice(26);
+  });
+
   const [hasWon, setHasWon] = useState(0);
 
-  useEffect(() => {
-      setPile1(deck.slice(0, 26));
-      setPile2(deck.slice(26));
+  const [oneScore, setOneScore] = useState(0);
+  const [twoScore, setTwoScore] = useState(0);
 
-        props.client.onopen = () => {
-          console.log('WebSocket Client Connected');
-        };
-        props.client.onmessage = (message) => {
-          console.log(message);
-        };
+  useEffect(() => {
+    const data = {
+      "won" : 5,
+      "myCard" : pile1[0],
+      "opCard" : pile2[0],
+    }
+    props.client.onopen = () => {
+      console.log('WebSocket Client Connected');
+      props.client.send(JSON.stringify(data));
+    };
+
+    props.client.onmessage = (message) => {
+      console.log(message);
+      handleUpdate(message);
+    };
+
+    
+    console.log(data)
+    
+    
+
   }, []);
 
+  const handleUpdate = (message) => {
+    
+    let msg = JSON.parse(message.data);
+  
+    let a = msg.opCard;
+    let b = msg.myCard;
+    if (msg.won !== 5) {
+      // Use functional form to ensure correct state update
+      setTwoScore((prevScore) => prevScore + (values.indexOf(a.value) <= values.indexOf(b.value) ? 1 : 0));
+      setOneScore((prevScore) => prevScore + (values.indexOf(a.value) >= values.indexOf(b.value) ? 1 : 0));
+    }
 
+    let newPile1 = pile1.slice()
+    let newPile2 = pile2.slice()
+    
+    newPile1[0] = msg.opCard;
+    newPile2[0] = msg.myCard;
+
+    setPile1(newPile1)
+    setPile2(newPile2)
+    if(msg.won == 2){
+      setHasWon(1)
+    }else if(msg.won == 1){
+      setHasWon(2)
+    }else if (msg.won == 3){
+      setHasWon(3)
+    }
+  }
 
   const handleNextClick = () => {
-    if (pile1.length === 0) {
-      setHasWon(2);
-    } else if (pile2.length === 0) {
-      setHasWon(1);
-    }
-    if (pile1.length === 0 || pile2.length === 0) {
-      return;
-    }
-    let a = pile1[0]
-    let b = pile2[0]
-
-    if (values.indexOf(a.value) > values.indexOf(b.value)) {
-      let newPile1 = pile1.slice(1)
-      let newPile2 = pile2.slice(1)
-
-      newPile1.push(b)
-      newPile1.push(a)      
-
-      setPile1(newPile1)
-      setPile2(newPile2)
-    } else {
-      let newPile2 = pile2.slice(1)
-      let newPile1 = pile1.slice(1)
-
-      newPile2.push(a)
-      newPile2.push(b)
-      
-      setPile1(newPile1)
-      setPile2(newPile2)
-
-      console.log(pile1)
-      console.log(pile2)
-
-    }
+   
+    
+  
+    const data = {
+      won: hasWon,
+      myCard: pile1[1],
+      opCard: pile2[1],
+    };
+    props.client.send(JSON.stringify(data));
+    
+  
+  
+    setPile1((prevPile1) => prevPile1.slice(1));
+    setPile2((prevPile2) => prevPile2.slice(1));
+  
+    // Access the updated values after the state has been updated
+    let a = pile1[1];
+    let b = pile2[1];
+    setTwoScore((prevScore) => prevScore + (values.indexOf(a.value) <= values.indexOf(b.value) ? 1 : 0));
+    setOneScore((prevScore) => prevScore + (values.indexOf(a.value) >= values.indexOf(b.value) ? 1 : 0));
+    console.log(oneScore)
+    console.log(twoScore)
+    
+   
+      // Use functional form to ensure correct state update
+    // setTwoScore((prevScore) => prevScore + (values.indexOf(a.value) >= values.indexOf(b.value) ? 1 : 0));
+    // setOneScore((prevScore) => prevScore + (values.indexOf(a.value) <= values.indexOf(b.value) ? 1 : 0));
+    
   };
+  useEffect(() => {
+    if (oneScore >= 5 && twoScore >= 5) {
+      setHasWon(3);
+    } else if (oneScore >= 5) {
+      setHasWon(1);
+    } else if (twoScore >= 5) {
+      setHasWon(2);
+    } else {
+      setHasWon(0);
+    }
+  }, [oneScore, twoScore]);
   
   return (
-
-    <div>
-      <h1>WELCOME TO WAR</h1>
-      <div>
-        
+    <div className="gameContainer">
+      <h1>YOUR SCORE: {oneScore}</h1>
+      <h1>OPPONENT SCORE: {twoScore}</h1>
+      
+      <div className="Imager">
+        <h1>P1</h1>
         {pile1.length > 0 ? <Card card = {pile1[0]}/> : <></>}
         {pile1.length > 0 ? <Card card = {pile2[0]}/> : <></>}
-
-        {hasWon == 1 ? <h1>PLAYER ONE HAS WON THE GAME</h1> : <></>}
-        {hasWon == 2 ? <h1>PLAYER TWO HAS WON THE GAME</h1> : <></>}
-
+        <h1>P2</h1>
       </div>
-      <div className = "container">
-        <button onClick={handleNextClick} className = "btn btn-success btn-sm me-1 size-20px">Next</button>
-      </div>
+
+      {hasWon === 1 ? <h1>PLAYER ONE HAS WON THE GAME</h1> : <></>}
+      {hasWon === 2 ? <h1>PLAYER TWO HAS WON THE GAME</h1> : <></>}
+      {hasWon === 3 ? <h1>THE GAME IS TIED</h1> : <></>}
+
+      {hasWon === 0 ? <button onClick={handleNextClick} className = "btn btn-success btn-sm me-1 size-50px">Next</button> : <></>}
+
+
     </div>
-
   );
 }
 
