@@ -132,7 +132,7 @@ function getCardIMG({card}) {
 function Card({card}) {
   var s = getCardIMG({card});
   return (
-    <img src={map.get(s)} className = "card"/>
+    <img src={map.get(s)} className = "warcard"/>
   )
 }
 
@@ -222,11 +222,11 @@ function Deck(props){
 
     setPile1(newPile1)
     setPile2(newPile2)
-    if(msg.won == 2){
+    if(msg.won === 2){
       setHasWon(1)
-    }else if(msg.won == 1){
+    }else if(msg.won === 1){
       setHasWon(2)
-    }else if (msg.won == 3){
+    }else if (msg.won === 3){
       setHasWon(3)
     }
   }
@@ -274,11 +274,11 @@ function Deck(props){
   }, [oneScore, twoScore]);
   
   return (
-    <div className="gameContainer">
+    <div className="wargameContainer">
       <h1>YOUR SCORE: {oneScore}</h1>
       <h1>OPPONENT SCORE: {twoScore}</h1>
       
-      <div className="Imager">
+      <div className="warImager">
         <h1>P1</h1>
         {pile1.length > 0 ? <Card card = {pile1[0]}/> : <></>}
         {pile1.length > 0 ? <Card card = {pile2[0]}/> : <></>}

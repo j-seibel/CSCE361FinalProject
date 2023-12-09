@@ -1,4 +1,4 @@
-.card {
+.warcard {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
@@ -11,7 +11,7 @@
     font-size : 40;
 }
 
-.gameContainer {
+.wargameContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +19,7 @@
     height: 100vh;
 }
 
-.Imager {
+.warImager {
     display : flex;
     justify-content: space-between;
 }
