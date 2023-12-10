@@ -1,5 +1,17 @@
 # CSCE361FinalProject
 
+# Setting up the React Frontend
+This guide will walk you through the steps to start the React app. 
+You must have Node.js installed on your computer to run React Applications. (https://nodejs.org/en/download)
+
+## Step 1: Navigate to the frontend/cardgame_frontend folder
+`cd` into the frontend/cardgame_frontend folder. This contains all of the React App.
+
+## Step 2: Installing dependencies
+Now that we are in the folder. You can run `npm install` to install all of the node packages.
+
+## Step 3: Running the app
+We are all ready to run the app! run `npm start` and navigate to `localhost:3000` in your broswer to see the page.
 
 # Setting up the .NET Docker Environment
 
