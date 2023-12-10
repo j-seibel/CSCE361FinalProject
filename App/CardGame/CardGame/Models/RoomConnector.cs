@@ -8,11 +8,11 @@ namespace CardGame.Models
         {
             try
             {
-                DataInserter.playerJoinRoom(roomToJoin.userId, roomToJoin.roomID);
+                DataInserter.playerJoinRoom(roomToJoin.name, roomToJoin.roomID);
 
-            }catch (Exception e)
+            }catch (Exception)
             {
-                throw new Exception();
+                throw new Exception("Failed to join room");
             }
 
 
@@ -23,12 +23,13 @@ namespace CardGame.Models
         {
             try
             {
-                DataInserter.createRoom(roomToJoin.roomID, roomToJoin.userId);
+                DataInserter.createRoom(roomToJoin.name, roomToJoin.roomID);
+                joinRoom(roomToJoin);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new Exception();
+                throw new Exception("Failed to create room");
             }
 
 
@@ -42,9 +43,9 @@ namespace CardGame.Models
                 DataInserter.playerLeaveRoom(roomToJoin.name, roomToJoin.roomID);
 
             }
-            catch (Exception e)
+            catch (Exception )
             {
-                throw new Exception();
+                throw new Exception("Failed to leave room");
             }
 
 

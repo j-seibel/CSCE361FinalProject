@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CardGame.DataModels.Room">
+    <Position X="8.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAACAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModels\Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.DataModels.State">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAIAEAAAAAAA=</HashCode>
+      <FileName>DataModels\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.DataModels.CardInfo">
+    <Position X="5" Y="0.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModels\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.Models.Player" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAACAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Models\Player.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.521" />
+  </Class>
+  <Class Name="CardGame.Models.RoomUtilites" Collapsed="true">
+    <Position X="4.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABBAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RoomConnector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.SQL.ConnectionAccessor">
+    <Position X="1" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAABAAAQAAAAAAAAAAABAABAA=</HashCode>
+      <FileName>SQL\ConnectionAccessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.SQL.DataInserter" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIRAAAABAAAAAAAAAIAAAAQAAAIAAAAA=</HashCode>
+      <FileName>SQL\DataInserter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.SQL.DataLoader" Collapsed="true">
+    <Position X="3" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>SQL\DataLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.Controllers.RoomController">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAhAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\RoomController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebSocketsSample.Controllers.WebSocketController">
+    <Position X="9.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAAIAAAAAQAAAA=</HashCode>
+      <FileName>Controllers\WebSocketController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CardGame.Models.IEloCalc">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IEloCalc.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

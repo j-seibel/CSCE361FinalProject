@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Cors;
-using System;
 using CardGame.DataModels;
-using System.Collections.Generic;
 using CardGame.Models;
 using CardGame.SQL;
 namespace CardGame.Controllers
@@ -34,10 +31,7 @@ namespace CardGame.Controllers
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine("Request Received");
-                System.Diagnostics.Debug.WriteLine($"Property1: {room.name}");
-                System.Diagnostics.Debug.WriteLine($"Property2: {room.roomID}");
-                System.Diagnostics.Debug.WriteLine($"Property3: {room.userId}");
+                
                 if (DataLoader.getPlayerInfo(room.name)[0] == -1 )
                 {
                     DataInserter.createPlayer(room.name);
@@ -55,35 +49,27 @@ namespace CardGame.Controllers
         }
 
         // PUT api/Room/5
-        [HttpPut("{id}")]
-        public void Put([FromBody] Room room)
-        {
-            System.Diagnostics.Debug.WriteLine("Request Received");
-        }
-
-        // DELETE api/Room/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
 
         // POST api/Room/join
         [HttpPost("join")]
         [EnableCors]
-        public IActionResult Join([FromBody] Room joinRequest)
+        public void Join([FromBody] Room room)
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine("Join Request Received");
-                System.Diagnostics.Debug.WriteLine($"RoomID: {joinRequest.roomID}");
-                System.Diagnostics.Debug.WriteLine($"UserID: {joinRequest.userId}");
 
-                return Ok("Successfully joined the room"); 
+                if (DataLoader.getPlayerInfo(room.name)[0] == -1)
+                {
+                    DataInserter.createPlayer(room.name);
+                }
+                RoomUtilites.joinRoom(room);
+
+
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error joining room: {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error");
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+                throw;
             }
         }
     }

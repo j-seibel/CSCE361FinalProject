@@ -178,7 +178,7 @@ function Deck(props){
 
   const [oneScore, setOneScore] = useState(0);
   const [twoScore, setTwoScore] = useState(0);
-
+  const [myName, setMyName] = useState("Player1");
   useEffect(() => {
     const data = {
       "won" : 5,
@@ -205,6 +205,9 @@ function Deck(props){
   const handleUpdate = (message) => {
     
     let msg = JSON.parse(message.data);
+    if(msg.hasOwnProperty('opName')){
+      
+    }
   
     let a = msg.opCard;
     let b = msg.myCard;

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Sockets;
+﻿
 using System.Net.WebSockets;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 using CardGame.DataModels;
 using CardGame.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -82,7 +75,6 @@ namespace WebSocketsSample.Controllers
                         }
                         System.Diagnostics.Debug.WriteLine(map.Count);
 
-                        // Ensure you use a new buffer instance when sending messages
                     }
 
                     else if (result.MessageType == WebSocketMessageType.Close)
