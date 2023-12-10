@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Net.WebSockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using CardGame.DataModels;
+using CardGame.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -17,7 +20,7 @@ namespace WebSocketsSample.Controllers
     public class WebSocketController : ControllerBase
     {
         private static List<WebSocket> connections = new List<WebSocket>();
-        private static Dictionary<String, WebSocket> map = new Dictionary<string, WebSocket>();
+        private static Dictionary< WebSocket, (String, String)> map = new Dictionary<WebSocket, (String, String)>();
 
         [HttpGet("/ws")]
         public async Task<IActionResult> Connect()
@@ -46,7 +49,7 @@ namespace WebSocketsSample.Controllers
 
                 string receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
                 System.Diagnostics.Debug.WriteLine(receivedMessage);
-
+                
                 dynamic jsonDynamic = JsonConvert.DeserializeObject(receivedMessage);
                 
 
@@ -73,9 +76,9 @@ namespace WebSocketsSample.Controllers
                     {
                         Room r = JsonConvert.DeserializeObject<Room>(receivedMessage);
 
-                        if (!map.ContainsKey(r.name))
+                        if (!map.ContainsKey(webSocket))
                         {
-                            map.Add(r.name, webSocket);
+                            map.Add( webSocket, (r.name, r.roomID));
                         }
                         System.Diagnostics.Debug.WriteLine(map.Count);
 
@@ -86,6 +89,10 @@ namespace WebSocketsSample.Controllers
                     {
                         await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
                         connections.Remove(webSocket);
+                        Room roomToLeave = new Room(map[webSocket].Item1, map[webSocket].Item2, "");
+                        RoomUtilites.leaveRoom(roomToLeave);
+                        map.Remove(webSocket);
+                        
                     }
                 }
             }

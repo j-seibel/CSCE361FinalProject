@@ -1,8 +1,8 @@
 ﻿using CardGame.DataModels;
 using CardGame.SQL;
-namespace CardGame.Models.RoomConnector
+namespace CardGame.Models
 {
-    public class RoomUtilites
+    public static class RoomUtilites
     {
         public static void joinRoom(Room roomToJoin)
         {
@@ -39,7 +39,7 @@ namespace CardGame.Models.RoomConnector
         {
             try
             {
-                DataInserter.playerLeaveRoom(roomToJoin.userId, roomToJoin.roomID);
+                DataInserter.playerLeaveRoom(roomToJoin.name, roomToJoin.roomID);
 
             }
             catch (Exception e)

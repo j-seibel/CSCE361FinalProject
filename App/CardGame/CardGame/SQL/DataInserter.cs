@@ -9,15 +9,13 @@ using System.Data.SqlClient;
 public class DataInserter
 {
 
-    public static void createPlayer(string username, string password)
+    public static void createPlayer(string username)
     {
-        string sql = "insert into Player (username, password) values (@username, @password);";
+        string sql = "insert into Player (username, ELO, gamesPlayed, gamesWon) values (@username, 1000, 0, 0);";
         SqlCommand cmd = new SqlCommand(sql, ConnectionAccessor.GetConnection());
         SqlParameter[] param = new SqlParameter[2];
         param[0] = new SqlParameter("@username", username);
-        param[1] = new SqlParameter("@password", password);
         cmd.Parameters.AddWithValue("@username", username);
-        cmd.Parameters.AddWithValue("@password", password);
         try
         {
             ConnectionAccessor.CreateConnection();

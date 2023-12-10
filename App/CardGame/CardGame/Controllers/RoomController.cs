@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Cors;
 using System;
 using CardGame.DataModels;
 using System.Collections.Generic;
-
+using CardGame.Models;
+using CardGame.SQL;
 namespace CardGame.Controllers
 {
     [Produces("application/json")]
@@ -37,6 +38,14 @@ namespace CardGame.Controllers
                 System.Diagnostics.Debug.WriteLine($"Property1: {room.name}");
                 System.Diagnostics.Debug.WriteLine($"Property2: {room.roomID}");
                 System.Diagnostics.Debug.WriteLine($"Property3: {room.userId}");
+                if (DataLoader.getPlayerInfo(room.name)[0] == -1 )
+                {
+                    DataInserter.createPlayer(room.name);
+                }
+                RoomUtilites.createRoom(room);
+                RoomUtilites.joinRoom(room);
+                
+
             }
             catch (Exception ex)
             {
