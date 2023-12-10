@@ -9,6 +9,7 @@ If War is chosen, then the player can generate their room token and start a game
 
 If Solitaire is chosen, then the user is redirected to the solitaire page. The page keeps track of your time taken to finish and records your best time. Upon building your four foundation piles, one for each suit, in ascending order from Ace to King, the page will update and display a 'you win' message.
 
+Below are a set of instructions to get the web app up and running!
 
 # Setting up the React Frontend
 This guide will walk you through the steps to start the React app. 
