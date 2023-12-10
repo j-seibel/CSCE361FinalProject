@@ -10,19 +10,8 @@ namespace CardGame.Controllers
     [ApiController]
     public class RoomController : ControllerBase
     {
-        // GET: api/Room
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        
 
-        // GET api/Room/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/Room
         [HttpPost]
@@ -48,7 +37,6 @@ namespace CardGame.Controllers
             }
         }
 
-        // PUT api/Room/5
 
         // POST api/Room/join
         [HttpPost("join")]

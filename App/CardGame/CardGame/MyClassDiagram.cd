@@ -9,70 +9,95 @@
   </Class>
   <Class Name="CardGame.DataModels.State">
     <Position X="6.5" Y="0.75" Width="1.5" />
+    <AssociationLine Name="opCard" Type="CardGame.DataModels.CardInfo" ManuallyRouted="true">
+      <Path>
+        <Point X="7.094" Y="1.853" />
+        <Point X="7.094" Y="2.232" />
+        <Point X="6.399" Y="2.232" />
+        <Point X="6.399" Y="2.622" />
+        <Point X="7.094" Y="2.622" />
+        <Point X="7.094" Y="3" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="myCard" Type="CardGame.DataModels.CardInfo" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.578" Y="1.853" />
+        <Point X="7.578" Y="2.75" />
+        <Point X="8" Y="2.75" />
+        <Point X="8" Y="2.94" />
+        <Point X="8.25" Y="2.94" />
+        <Point X="8.25" Y="3.375" />
+        <Point X="8" Y="3.375" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAIAEAAAAAAA=</HashCode>
       <FileName>DataModels\State.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="opCard" />
+      <Property Name="myCard" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="CardGame.DataModels.CardInfo">
-    <Position X="5" Y="0.75" Width="1.25" />
+    <Position X="6.75" Y="3" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>DataModels\State.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CardGame.Models.Player" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="6" Y="4.25" Width="1.5" />
+  <Class Name="CardGame.Models.Player" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAACAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Models\Player.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.521" />
   </Class>
-  <Class Name="CardGame.Models.RoomUtilites" Collapsed="true">
-    <Position X="4.25" Y="3.25" Width="1.5" />
+  <Class Name="CardGame.Models.RoomUtilites">
+    <Position X="4.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAABBAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\RoomConnector.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CardGame.SQL.ConnectionAccessor">
-    <Position X="1" Y="0.75" Width="1.75" />
+    <Position X="0.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAAAABAAAQAAAAAAAAAAABAABAA=</HashCode>
       <FileName>SQL\ConnectionAccessor.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CardGame.SQL.DataInserter" Collapsed="true">
-    <Position X="2.25" Y="3.25" Width="1.75" />
+  <Class Name="CardGame.SQL.DataInserter">
+    <Position X="4.5" Y="2.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIRAAAABAAAAAAAAAIAAAAQAAAIAAAAA=</HashCode>
       <FileName>SQL\DataInserter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CardGame.SQL.DataLoader" Collapsed="true">
-    <Position X="3" Y="0.75" Width="1.75" />
+  <Class Name="CardGame.SQL.DataLoader">
+    <Position X="0.5" Y="2.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>SQL\DataLoader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CardGame.Controllers.RoomController">
-    <Position X="8" Y="3.25" Width="1.5" />
+    <Position X="10.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAhAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\RoomController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebSocketsSample.Controllers.WebSocketController">
-    <Position X="9.75" Y="2.75" Width="1.5" />
+    <Position X="12" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAAIAAAAAQAAAA=</HashCode>
       <FileName>Controllers\WebSocketController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="CardGame.Models.IEloCalc">
-    <Position X="6" Y="2.5" Width="1.5" />
+    <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\IEloCalc.cs</FileName>
